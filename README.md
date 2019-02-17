@@ -9,3 +9,6 @@ The 'Datasets' folder contains all the datasets.
 
 Changelog v1.0:
 Added Datasets to options 1,2,3 i.e. Education, Demography & Economy.
+
+Changelog v1.1:
+Added all the datasets, the program is fully functional.
