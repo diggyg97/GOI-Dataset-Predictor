@@ -12,3 +12,6 @@ Added Datasets to options 1,2,3 i.e. Education, Demography & Economy.
 
 Changelog v1.1:
 Added all the datasets, the program is fully functional.
+
+Changelog v2.0:
+Added code to graphically represent a region/states values for all the years.
