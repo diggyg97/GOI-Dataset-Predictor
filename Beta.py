@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
 
 #Defining function to check for digit input and if the input is between the desired numbers and converting the string input to integer input if the first two conditions are met.
 
@@ -20,6 +22,7 @@ def csv_display(directory,index,z,x):
     s = pd.read_csv(directory)
     print(s)
     o = int_check(1,2,"\nWould you like to predict future values?\n\n1. Yes\n2. No\n\nChoose a corresponding number: ")
+    #If loop here exists for datasets that do not have more than 1 column of values.
     if directory not in ['/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Transport/TS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/LAE/UR.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/LAE/LFPR.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/LAE/WRP.csv']:
         if o==1:
             n = int_check(0,x,'\nWhich one of the following places would you like to predict the future values for?\n\n{}\n\nPlease choose the corresponding integer: '.format(s.iloc[:,0].to_string()))
@@ -32,12 +35,25 @@ def csv_display(directory,index,z,x):
                 if n==i:
                     if lower.iloc[i]>100 and directory not in ['/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Education/GERP.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Education/GERUP.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Education/GERS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Education/GERUS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/CSR_Rural.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/CSR_Total.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/CSR_Urban.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/SR_Rural.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/SR_Total.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/SR_Urban.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/DC_Rural.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/DC_Total.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/DC_Urban.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Economy/PGOY.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Economy/GSDP_2.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Economy/NSDP_2.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Economy/NSDP.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Industries/IMS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Industries/MTS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Industries/AS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Industries/AMS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Industries/AS_2.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Industries/TFS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Transport/Roads.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Transport/NH.csv']:
                         lower.iloc[i]=100
+                    if lower.iloc[i]<0:
+                        lower.iloc[i]=0
                     if upper.iloc[i]>100 and directory not in ['/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Education/GERP.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Education/GERUP.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Education/GERS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Education/GERUS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/CSR_Rural.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/CSR_Total.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/CSR_Urban.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/SR_Rural.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/SR_Total.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/SR_Urban.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/DC_Rural.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/DC_Total.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Demography/DC_Urban.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Economy/PGOY.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Economy/GSDP_2.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Economy/NSDP_2.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Economy/NSDP.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Industries/IMS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Industries/MTS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Industries/AS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Industries/AMS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Industries/AS_2.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Industries/TFS.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Transport/Roads.csv','/Users/digvijayghotane/Desktop/Projects/Data_Analysis_GOI/Datasets/Transport/NH.csv']:
                         upper.iloc[i]=100
-                    print('\nThe range of values for',s.iloc[i][0],'are between',round(lower.iloc[i],3),'and',round(upper.iloc[i],3),'for the year',z)
+                    if upper.iloc[i]<0:
+                        upper.iloc[i]=0
+                    print('\nThe range of values for',s.iloc[i][0],'are between',round(lower.iloc[i],3),'and',round(upper.iloc[i],3),'for',z)
                     i=i+1
     else:
         print("\nYou cannot predict values for this particular dataset.")
+    o = int_check(1,2,"\nWould you like to see a graphical representation?\n\n1. Yes\n2. No\n\nChoose a corresponding number: ")
+    if o==1:
+        n = int_check(0,x,'\nWhich one of the following places would you like to graphically represent?\n\n{}\n\nPlease choose the corresponding integer: '.format(s.iloc[:,0].to_string()))
+        h = index
+        j = s.iloc[n,1:]
+        plt.scatter(h,j)
+        plt.xlabel('Year')
+        plt.ylabel('Values')
+        plt.show()
     return s
 
 # a variable is to decide initial dataset, b variable is for selecting the dataset within the dataset, c is sub-choice.
